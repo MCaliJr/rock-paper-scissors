@@ -56,7 +56,7 @@ function play(computerSelection, playerSelection) {
 
 // wrap the whole code in one function called game()
 function game() {
-  // repeat the game for 5 rounds
+  // repeat the game till score of one side is 5
   while (playerScore < 5 && computerScore < 5) {
     let computersHand = computerSelection();
     let usersHand = playerSelection();
@@ -72,5 +72,6 @@ function game() {
     console.log("Unfortunately, Computer won...");
   }
 }
+
 // invoke game() function
 game();
