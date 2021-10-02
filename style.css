@@ -36,7 +36,6 @@ h1 {
   display: flex;
   justify-content: space-around;
   min-width: 30vw;
-  border: solid red 1px;
   padding: 10px;
 }
 
