@@ -9,13 +9,31 @@ function computerSelection() {
   return computersHand;
 }
 
-// Get player's hand (and make player's input case insensitive)
-function playerSelection() {
-  let usersHand = prompt(
-    "What do You choose: rock, paper or scissors?"
-  ).toLowerCase();
-  return usersHand;
+// Select elements to change contents of the web as user plays
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+const results = document.querySelector("#results");
+
+const content = document.createElement("div");
+
+// Display current score on the page and announce winner
+function scoreboard() {
+  content.textContent = `Your score: ${playerScore}, computer's score: ${computerScore}`;
+
+  if (playerScore >= 5 && computerScore < 5) {
+    content.textContent =
+      "Congratulations, You've succesfully beat the machine!";
+  } else if (computerScore >= 5 && playerScore < 5) {
+    content.textContent = "Unfortunately, Computer won...";
+  } else if (computerScore >= 5 && playerScore >= 5) {
+    content.textContent = "Dude, it's over... STOP PLAYING!!!";
+  }
+  results.appendChild(content);
 }
+
+playerSelection();
 
 // play round of rock paper scissors with function which takes playerSelection and computerSelection as two parameters and return the winner (thus updating the score count)
 function play(computerSelection, playerSelection) {
@@ -54,27 +72,24 @@ function play(computerSelection, playerSelection) {
   }
 }
 
-// wrap the whole code in one function called game()
-function game() {
-  // repeat the game till score of one side is 5
-  while (playerScore < 5 && computerScore < 5) {
+// Get player's hand from button
+function playerSelection() {
+  rock.addEventListener("click", () => {
     let computersHand = computerSelection();
-    let usersHand = playerSelection();
+    let usersHand = "rock";
     play(computersHand, usersHand);
-    // return a string with scoreboard
-    console.log(
-      `Your score: ${playerScore}, computer's score: ${computerScore}`
-    );
-  }
-  if (playerScore == 5) {
-    console.log("Congratulations, You've succesfully beat the machine!");
-  } else if (computerScore == 5) {
-    console.log("Unfortunately, Computer won...");
-  }
+    scoreboard();
+  });
+  paper.addEventListener("click", () => {
+    let computersHand = computerSelection();
+    let usersHand = "paper";
+    play(computersHand, usersHand);
+    scoreboard();
+  });
+  scissors.addEventListener("click", () => {
+    let computersHand = computerSelection();
+    let usersHand = "scissors";
+    play(computersHand, usersHand);
+    scoreboard();
+  });
 }
-
-// invoke game() function
-game();
-
-// branch test -real test
-console.log("hello");
